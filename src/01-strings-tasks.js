@@ -65,8 +65,11 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const arr = value.split(' ');
+  const name = arr[1];
+  const surName = arr[2];
+  return `${name} ${surName.slice(0, surName.length - 1)}`;
 }
 
 
@@ -141,8 +144,9 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  const arr = str.split('');
+  return arr.slice(1, arr.length - 1).join('');
 }
 
 
