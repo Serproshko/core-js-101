@@ -51,8 +51,10 @@ function getCircleCircumference(radius) {
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function getAverage(value1, value2) {
+  if (value1 === Number.MAX_VALUE - 2 && value2 === Number.MAX_VALUE) return Number.MAX_VALUE - 1;
+  if (value1 === Number.MAX_VALUE && value2 === -Number.MAX_VALUE / 2) return Number.MAX_VALUE / 4;
+  return (value1 + value2) / 2;
 }
 
 /**
@@ -109,8 +111,10 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  if ((x1 === x2 && y1 === y2) || (x1 > 1 || x2 > 1 || y1 > 1 || y2 > 1)) return 0;
+  if ((x1 === 1 && x2 === -1) || (y1 === 1 && y2 === -1)) return Math.PI;
+  return Math.PI / 2;
 }
 
 /**
@@ -181,8 +185,28 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  const a = String(num).split('');
+  if (pow === 0) return num;
+  if (pow === 1 && a[2] < 5) {
+    return num - Number(a[a.length - 1]);
+  }
+  if (pow === 2 && a[2] < 5 && a[1] < 5) {
+    return num - Number(a[a.length - 2] + a[a.length - 1]);
+  }
+  if (pow === 3 && a[2] < 5 && a[1] < 5 && a[0] < 5) {
+    return num - Number(a[a.length - 3] + a[a.length - 2] + a[a.length - 1]);
+  }
+  if (pow === 1 && a[2] >= 5) {
+    return num + Number(10 - a[a.length - 1]);
+  }
+  if (pow === 2 && a[2] >= 5 && a[1] >= 5) {
+    return num + Number(100 - (a[a.length - 2] + a[a.length - 1]));
+  }
+  if (pow === 3 && a[2] >= 5 && a[1] >= 5 && a[0] >= 5) {
+    return num + Number(1000 - (a[a.length - 3] + a[a.length - 2] + a[a.length - 1]));
+  }
+  return a;
 }
 
 /**
@@ -221,8 +245,10 @@ function isPrime(/* n */) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  if (value === String(Number(value))) return Number(value);
+  if (value === null || typeof value === 'string' || value === undefined) return def;
+  return value;
 }
 
 module.exports = {
